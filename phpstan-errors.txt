@@ -1,0 +1,293 @@
+Failed loading /usr/local/lib/php/extensions/no-debug-non-zts-20210902/xdebug.so:  /usr/local/lib/php/extensions/no-debug-non-zts-20210902/xdebug.so: cannot open shared object file: No such file or directory
+Note: Using configuration file /usr/src/myapp/phpstan.neon.dist.
+ ------ -------------------------------------------------------------------- 
+  Line   Drivers/DatabaseDriver.php                                          
+ ------ -------------------------------------------------------------------- 
+  172    Call to function is_object() with stdClass will always evaluate to  
+         true.                                                               
+         🪪  function.alreadyNarrowedType                                    
+ ------ -------------------------------------------------------------------- 
+
+ ------ ----------------------------------------------------------------------- 
+  Line   Drivers/Decorator.php                                                  
+ ------ ----------------------------------------------------------------------- 
+  170    Call to function assert() with true will always evaluate to true.      
+         🪪  function.alreadyNarrowedType                                       
+         💡  Because the type is coming from a PHPDoc, you can turn off this    
+         check by setting treatPhpDocTypesAsCertain: false in your phpstan.neo  
+         n.dist.                                                                
+  170    Call to function is_object() with object will always evaluate to       
+         true.                                                                  
+         🪪  function.alreadyNarrowedType                                       
+  174    Parameter #1 $callback of static method Closure::fromCallable()        
+         expects callable(): mixed, object given.                               
+         🪪  argument.type                                                      
+  195    Parameter #2 $resolver of method                                       
+         Cline\Pole\Drivers\Decorator::resolve() expects callable(): mixed,     
+         mixed given.                                                           
+         🪪  argument.type                                                      
+  266    Parameter #1 $feature of method                                        
+         Cline\Pole\Drivers\Decorator::putInCache() expects string, mixed       
+         given.                                                                 
+         🪪  argument.type                                                      
+  676    Cannot access offset 'config' on                                       
+         Illuminate\Contracts\Container\Container.                              
+         🪪  offsetAccess.nonOffsetAccessible                                   
+  681    Call to function assert() with true will always evaluate to true.      
+         🪪  function.alreadyNarrowedType                                       
+         💡  Because the type is coming from a PHPDoc, you can turn off this    
+         check by setting treatPhpDocTypesAsCertain: false in your phpstan.neo  
+         n.dist.                                                                
+  681    Call to function is_string() with string will always evaluate to       
+         true.                                                                  
+         🪪  function.alreadyNarrowedType                                       
+         💡  Because the type is coming from a PHPDoc, you can turn off this    
+         check by setting treatPhpDocTypesAsCertain: false in your phpstan.neo  
+         n.dist.                                                                
+  1025   Possibly invalid array key type mixed.                                 
+         🪪  array.invalidKey                                                   
+  1075   Cannot access property $name on mixed.                                 
+         🪪  property.nonObject                                                 
+  1075   Method Cline\Pole\Drivers\Decorator::ensureDynamicFeatureIsDefined()   
+         should return string but returns mixed.                                
+         🪪  return.type                                                        
+  1202   Method Cline\Pole\Drivers\Decorator::calculateVariant() should return  
+         string but returns string|null.                                        
+         🪪  return.type                                                        
+ ------ ----------------------------------------------------------------------- 
+
+ ------ ----------------------------------------------------------------------- 
+  Line   Feature.php                                                            
+ ------ ----------------------------------------------------------------------- 
+  68     Class Cline\Pole\Feature has PHPDoc tag @method for method all()       
+         return type with no value type specified in iterable type array.       
+         🪪  missingType.iterableValue                                          
+         💡  See:                                                               
+         https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-i  
+         terable-type                                                           
+  68     Class Cline\Pole\Feature has PHPDoc tag @method for method             
+         allAreActive() parameter #1 $features with no value type specified in  
+         iterable type array.                                                   
+         🪪  missingType.iterableValue                                          
+         💡  See:                                                               
+         https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-i  
+         terable-type                                                           
+  68     Class Cline\Pole\Feature has PHPDoc tag @method for method             
+         allAreInactive() parameter #1 $features with no value type specified   
+         in iterable type array.                                                
+         🪪  missingType.iterableValue                                          
+         💡  See:                                                               
+         https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-i  
+         terable-type                                                           
+  68     Class Cline\Pole\Feature has PHPDoc tag @method for method             
+         defineGroup() parameter #2 $features with no value type specified in   
+         iterable type array.                                                   
+         🪪  missingType.iterableValue                                          
+         💡  See:                                                               
+         https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-i  
+         terable-type                                                           
+  68     Class Cline\Pole\Feature has PHPDoc tag @method for method defined()   
+         return type with no value type specified in iterable type array.       
+         🪪  missingType.iterableValue                                          
+         💡  See:                                                               
+         https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-i  
+         terable-type                                                           
+  68     Class Cline\Pole\Feature has PHPDoc tag @method for method getGroup()  
+         return type with no value type specified in iterable type array.       
+         🪪  missingType.iterableValue                                          
+         💡  See:                                                               
+         https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-i  
+         terable-type                                                           
+  68     Class Cline\Pole\Feature has PHPDoc tag @method for method loadAll()   
+         return type with no value type specified in iterable type array.       
+         🪪  missingType.iterableValue                                          
+         💡  See:                                                               
+         https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-i  
+         terable-type                                                           
+  68     Class Cline\Pole\Feature has PHPDoc tag @method for method             
+         loadMissing() parameter #1 $features with no value type specified in   
+         iterable type array.                                                   
+         🪪  missingType.iterableValue                                          
+         💡  See:                                                               
+         https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-i  
+         terable-type                                                           
+  68     Class Cline\Pole\Feature has PHPDoc tag @method for method             
+         loadMissing() return type with no value type specified in iterable     
+         type array.                                                            
+         🪪  missingType.iterableValue                                          
+         💡  See:                                                               
+         https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-i  
+         terable-type                                                           
+  68     Class Cline\Pole\Feature has PHPDoc tag @method for method nameMap()   
+         return type with no value type specified in iterable type array.       
+         🪪  missingType.iterableValue                                          
+         💡  See:                                                               
+         https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-i  
+         terable-type                                                           
+  68     Class Cline\Pole\Feature has PHPDoc tag @method for method purge()     
+         parameter #1 $features with no value type specified in iterable type   
+         array.                                                                 
+         🪪  missingType.iterableValue                                          
+         💡  See:                                                               
+         https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-i  
+         terable-type                                                           
+  68     Class Cline\Pole\Feature has PHPDoc tag @method for method             
+         someAreActive() parameter #1 $features with no value type specified    
+         in iterable type array.                                                
+         🪪  missingType.iterableValue                                          
+         💡  See:                                                               
+         https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-i  
+         terable-type                                                           
+  68     Class Cline\Pole\Feature has PHPDoc tag @method for method             
+         someAreInactive() parameter #1 $features with no value type specified  
+         in iterable type array.                                                
+         🪪  missingType.iterableValue                                          
+         💡  See:                                                               
+         https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-i  
+         terable-type                                                           
+  68     Class Cline\Pole\Feature has PHPDoc tag @method for method stored()    
+         return type with no value type specified in iterable type array.       
+         🪪  missingType.iterableValue                                          
+         💡  See:                                                               
+         https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-i  
+         terable-type                                                           
+  68     Class Cline\Pole\Feature has PHPDoc tag @method for method values()    
+         parameter #1 $features with no value type specified in iterable type   
+         array.                                                                 
+         🪪  missingType.iterableValue                                          
+         💡  See:                                                               
+         https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-i  
+         terable-type                                                           
+  68     Class Cline\Pole\Feature has PHPDoc tag @method for method values()    
+         return type with no value type specified in iterable type array.       
+         🪪  missingType.iterableValue                                          
+         💡  See:                                                               
+         https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-i  
+         terable-type                                                           
+ ------ ----------------------------------------------------------------------- 
+
+ ------ ----------------------------------------------------------------------- 
+  Line   FeatureManager.php                                                     
+ ------ ----------------------------------------------------------------------- 
+  123    Cannot access offset 'events' on                                       
+         Illuminate\Contracts\Container\Container.                              
+         🪪  offsetAccess.nonOffsetAccessible                                   
+  137    Cannot access offset 'db' on                                           
+         Illuminate\Contracts\Container\Container.                              
+         🪪  offsetAccess.nonOffsetAccessible                                   
+  139    Cannot access offset 'events' on                                       
+         Illuminate\Contracts\Container\Container.                              
+         🪪  offsetAccess.nonOffsetAccessible                                   
+  141    Cannot access offset 'config' on                                       
+         Illuminate\Contracts\Container\Container.                              
+         🪪  offsetAccess.nonOffsetAccessible                                   
+  165    Binary operation "." between non-falsy-string and mixed results in an  
+         error.                                                                 
+         🪪  binaryOp.invalid                                                   
+  166    Binary operation "." between literal-string&non-falsy-string and       
+         mixed results in an error.                                             
+         🪪  binaryOp.invalid                                                   
+  213    Cannot access offset 'config' on                                       
+         Illuminate\Contracts\Container\Container.                              
+         🪪  offsetAccess.nonOffsetAccessible                                   
+  215    Method Cline\Pole\FeatureManager::getDefaultDriver() should return     
+         string but returns mixed.                                              
+         🪪  return.type                                                        
+  226    Cannot access offset 'config' on                                       
+         Illuminate\Contracts\Container\Container.                              
+         🪪  offsetAccess.nonOffsetAccessible                                   
+  315    Parameter #1 $key of function array_key_exists expects int|string,     
+         mixed given.                                                           
+         🪪  argument.type                                                      
+  318    Parameter #1 $string of function ucfirst expects string, mixed given.  
+         🪪  argument.type                                                      
+  323    Part $config['driver'] (mixed) of encapsed string cannot be cast to    
+         string.                                                                
+         🪪  encapsedStringPart.nonString                                       
+  329    Parameter #2 $driver of class Cline\Pole\Drivers\Decorator             
+         constructor expects Cline\Pole\Contracts\Driver, mixed given.          
+         🪪  argument.type                                                      
+  343    Possibly invalid array key type mixed.                                 
+         🪪  offsetAccess.invalidOffset                                         
+  363    Cannot access offset 'auth' on                                         
+         Illuminate\Contracts\Container\Container.                              
+         🪪  offsetAccess.nonOffsetAccessible                                   
+  378    Cannot access offset 'config' on                                       
+         Illuminate\Contracts\Container\Container.                              
+         🪪  offsetAccess.nonOffsetAccessible                                   
+ ------ ----------------------------------------------------------------------- 
+
+ ------ ----------------------------------------------------------------------- 
+  Line   PendingScopedFeatureInteraction.php                                    
+ ------ ----------------------------------------------------------------------- 
+  135    Parameter #1 $features of method                                       
+         Cline\Pole\PendingScopedFeatureInteraction::loadMissing() expects      
+         array<int, string>|string, array<string> given.                        
+         🪪  argument.type                                                      
+  177    Parameter #1 $features of method                                       
+         Cline\Pole\PendingScopedFeatureInteraction::loadMissing() expects      
+         array<int, string>|string, array<string> given.                        
+         🪪  argument.type                                                      
+  181    Parameter #1 $feature of method Cline\Pole\Drivers\Decorator::get()    
+         expects string, mixed given.                                           
+         🪪  argument.type                                                      
+  194    Parameter #1 $features of method                                       
+         Cline\Pole\PendingScopedFeatureInteraction::loadMissing() expects      
+         array<int, string>|string, array<string> given.                        
+         🪪  argument.type                                                      
+  222    Parameter #1 $features of method                                       
+         Cline\Pole\PendingScopedFeatureInteraction::loadMissing() expects      
+         array<int, string>|string, array<string> given.                        
+         🪪  argument.type                                                      
+  226    Parameter #1 $feature of method Cline\Pole\Drivers\Decorator::get()    
+         expects string, mixed given.                                           
+         🪪  argument.type                                                      
+  239    Parameter #1 $features of method                                       
+         Cline\Pole\PendingScopedFeatureInteraction::loadMissing() expects      
+         array<int, string>|string, array<string> given.                        
+         🪪  argument.type                                                      
+  292    Parameter #1 $feature of method Cline\Pole\Drivers\Decorator::set()    
+         expects string, mixed given.                                           
+         🪪  argument.type                                                      
+  306    Parameter #1 $feature of method Cline\Pole\Drivers\Decorator::set()    
+         expects string, mixed given.                                           
+         🪪  argument.type                                                      
+  320    Parameter #1 $feature of method                                        
+         Cline\Pole\Drivers\Decorator::delete() expects string, mixed given.    
+         🪪  argument.type                                                      
+  334    Parameter #1 $feature of method Cline\Pole\Drivers\Decorator::set()    
+         expects string, mixed given.                                           
+         🪪  argument.type                                                      
+  348    Parameter #1 $feature of method Cline\Pole\Drivers\Decorator::set()    
+         expects string, mixed given.                                           
+         🪪  argument.type                                                      
+  368    Parameter #1 $features of method                                       
+         Cline\Pole\PendingScopedFeatureInteraction::loadMissing() expects      
+         array<int, string>|string, array<string> given.                        
+         🪪  argument.type                                                      
+  372    Parameter #1 $feature of method Cline\Pole\Drivers\Decorator::get()    
+         expects string, mixed given.                                           
+         🪪  argument.type                                                      
+  392    Parameter #1 $features of method                                       
+         Cline\Pole\PendingScopedFeatureInteraction::loadMissing() expects      
+         array<int, string>|string, array<string> given.                        
+         🪪  argument.type                                                      
+  476    Method Cline\Pole\PendingScopedFeatureInteraction::calculateVariant()  
+         should return string but returns string|null.                          
+         🪪  return.type                                                        
+ ------ ----------------------------------------------------------------------- 
+
+ ------ ------------------------------------------------------- 
+  Line   PoleServiceProvider.php                                
+ ------ ------------------------------------------------------- 
+  104    Cannot access offset 'events' on                       
+         Illuminate\Contracts\Foundation\Application.           
+         🪪  offsetAccess.nonOffsetAccessible                   
+  131    Cannot access offset 'Cline\\Pole\\FeatureManager' on  
+         Illuminate\Contracts\Foundation\Application.           
+         🪪  offsetAccess.nonOffsetAccessible                   
+ ------ ------------------------------------------------------- 
+
+ [ERROR] Found 63 errors                                                        
+
+
