@@ -1,0 +1,111 @@
+{
+    "name": "cline/toggl",
+    "description": "Advanced feature flag management with strategies, time bombs, and groups",
+    "license": "MIT",
+    "keywords": [
+        "php"
+    ],
+    "authors": [
+        {
+            "name": "Brian Faust",
+            "email": "brian@cline.sh"
+        }
+    ],
+    "require": {
+        "php": "^8.4.0",
+        "illuminate/contracts": "^11.0 || ^12.0",
+        "illuminate/database": "^11.0 || ^12.0",
+        "illuminate/events": "^11.0 || ^12.0",
+        "illuminate/support": "^11.0 || ^12.0",
+        "spatie/laravel-package-tools": "^1.92.7"
+    },
+    "require-dev": {
+        "cline/php-cs-fixer": "^1.2.1",
+        "driftingly/rector-laravel": "^2.1.3",
+        "ergebnis/composer-normalize": "^2.49@dev",
+        "laravel/octane": "^2.13.1",
+        "laravel/pennant": "^1.18.3",
+        "laravel/pint": "^1.25.1",
+        "orchestra/testbench": "^10.7",
+        "pestphp/pest": "^3.8.4",
+        "pestphp/pest-plugin-laravel": "^3.2",
+        "pestphp/pest-plugin-type-coverage": "^3.6.1",
+        "phpstan/phpstan": "^2.1.32",
+        "rector/rector": "^2.2.8",
+        "symfony/var-dumper": "^7.3.5",
+        "tomasvotruba/lines": "^1.0",
+        "ylsideas/feature-flags": "^3.0.2"
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Cline\\Toggl\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "ergebnis/composer-normalize": true,
+            "pestphp/pest-plugin": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "aliases": {
+                "Toggl": "Cline\\Toggl\\Toggl"
+            },
+            "providers": [
+                "Cline\\Toggl\\TogglServiceProvider"
+            ]
+        }
+    },
+    "scripts": {
+        "lint": "vendor/bin/php-cs-fixer fix",
+        "refactor": "rector",
+        "test": "@test:morphs",
+        "test:lint": "vendor/bin/php-cs-fixer check --diff",
+        "test:morphs": [
+            "@test:lint",
+            "@test:type-coverage",
+            "@test:unit",
+            "@test:types",
+            "@test:refactor"
+        ],
+        "test:numeric": [
+            "@test:lint",
+            "@test:type-coverage:numeric",
+            "@test:unit:numeric",
+            "@test:types",
+            "@test:refactor"
+        ],
+        "test:refactor": "rector --dry-run",
+        "test:type-coverage": "vendor/bin/pest --parallel --exactly=100 --type-coverage --configuration=phpunit.morphs.xml",
+        "test:type-coverage:numeric": "vendor/bin/pest --parallel --exactly=100 --type-coverage --configuration=phpunit.numeric.xml",
+        "test:type-coverage:ulid": "vendor/bin/pest --parallel --exactly=100 --type-coverage --configuration=phpunit.ulid.xml",
+        "test:type-coverage:uuid": "vendor/bin/pest --parallel --exactly=100 --type-coverage --configuration=phpunit.uuid.xml",
+        "test:types": "phpstan --memory-limit=4G",
+        "test:ulid": [
+            "@test:lint",
+            "@test:type-coverage:ulid",
+            "@test:unit:ulid",
+            "@test:types",
+            "@test:refactor"
+        ],
+        "test:unit": "pest --parallel --exactly=100 --coverage --configuration=phpunit.morphs.xml",
+        "test:unit:numeric": "pest --parallel --exactly=100 --coverage --configuration=phpunit.numeric.xml",
+        "test:unit:ulid": "pest --exactly=100 --coverage --configuration=phpunit.ulid.xml",
+        "test:unit:uuid": "pest --parallel --exactly=100 --coverage --configuration=phpunit.uuid.xml",
+        "test:uuid": [
+            "@test:lint",
+            "@test:type-coverage:uuid",
+            "@test:unit:uuid",
+            "@test:types",
+            "@test:refactor"
+        ]
+    }
+}
