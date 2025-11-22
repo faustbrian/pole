@@ -1,0 +1,117 @@
+---
+name: Quality Assurance
+on:
+    push:
+        branches: ['main']
+    pull_request: ~
+    workflow_dispatch:
+        inputs:
+            database:
+                description: 'Database driver to test'
+                required: true
+                type: choice
+                options:
+                    - pgsql
+                    - mysql
+                    - sqlite
+                default: 'pgsql'
+
+concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    tests:
+        name: Tests on PHP ${{ matrix.php }} / ${{ matrix.db }} / PK:${{ matrix.primary_key_type }}
+        runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false
+            matrix:
+                php: ['8.4']
+                db: ${{ github.event_name == 'workflow_dispatch' && fromJSON(format('["{0}"]', github.event.inputs.database)) || fromJSON('["pgsql"]') }}
+                primary_key_type: ['id', 'ulid', 'uuid']
+        services:
+            postgres:
+                image: postgres:18
+                env:
+                    POSTGRES_PASSWORD: password
+                    POSTGRES_DB: toggl_test
+                ports:
+                    - 5432:5432
+                options: --health-cmd=pg_isready --health-interval=10s --health-timeout=5s --health-retries=3
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Start MySQL
+              if: matrix.db == 'mysql'
+              run: |
+                  sudo systemctl start mysql.service
+                  mysql -e 'CREATE DATABASE toggl_test;' -uroot -proot
+
+            - uses: shivammathur/setup-php@v2
+              with:
+                  php-version: ${{ matrix.php }}
+                  extensions: pdo, pdo_mysql, pdo_pgsql, pdo_sqlite
+                  coverage: pcov
+                  tools: composer:v2
+
+            - run: composer install --no-progress
+
+            - run: vendor/bin/pest --coverage --min=90
+              env:
+                  DB_CONNECTION: ${{ matrix.db }}
+                  DB_HOST: 127.0.0.1
+                  DB_PORT: ${{ matrix.db == 'mysql' && '3306' || '5432' }}
+                  DB_DATABASE: toggl_test
+                  DB_USERNAME: ${{ matrix.db == 'mysql' && 'root' || 'postgres' }}
+                  DB_PASSWORD: ${{ matrix.db == 'mysql' && 'root' || 'password' }}
+                  TOGGL_PRIMARY_KEY_TYPE: ${{ matrix.primary_key_type }}
+                  TOGGL_MORPH_TYPE: ${{ matrix.primary_key_type == 'ulid' && 'ulidMorph' || (matrix.primary_key_type == 'uuid' && 'uuidMorph' || 'numericMorph') }}
+
+    phpstan:
+        name: PHPStan on ${{ matrix.php }} ${{ matrix.composer-flags }}
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                php: ['8.4']
+                composer-flags: ['']
+        steps:
+            - uses: actions/checkout@v4
+            - uses: shivammathur/setup-php@v2
+              with:
+                  php-version: ${{ matrix.php }}
+                  tools: composer:v2
+            - run: composer install --no-progress ${{ matrix.composer-flags }}
+            - run: vendor/bin/phpstan
+
+    php-cs-fixer:
+        name: Code Style on ${{ matrix.php }} ${{ matrix.composer-flags }}
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                php: ['8.4']
+                composer-flags: ['']
+        steps:
+            - uses: actions/checkout@v4
+            - uses: shivammathur/setup-php@v2
+              with:
+                  php-version: ${{ matrix.php }}
+                  tools: composer:v2
+            - run: composer install --no-progress ${{ matrix.composer-flags }}
+            - run: vendor/bin/php-cs-fixer check --diff
+
+    rector:
+        name: Rector on ${{ matrix.php }} ${{ matrix.composer-flags }}
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                php: ['8.4']
+                composer-flags: ['']
+        steps:
+            - uses: actions/checkout@v4
+            - uses: shivammathur/setup-php@v2
+              with:
+                  php-version: ${{ matrix.php }}
+                  tools: composer:v2
+            - run: composer install --no-progress ${{ matrix.composer-flags }}
+            - run: vendor/bin/rector --dry-run
